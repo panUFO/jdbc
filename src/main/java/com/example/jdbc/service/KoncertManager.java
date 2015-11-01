@@ -1,4 +1,4 @@
-package test.java.com.example.service;
+package main.java.com.example.jdbc.service;
 
 import main.java.com.example.jdbc.domain.Koncert;
 
