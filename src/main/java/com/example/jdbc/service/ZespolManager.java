@@ -26,9 +26,18 @@ public class ZespolManager {
             "  [zespol_kraj] VARCHAR(30) NOT NULL\n" +
             ")";
 
+
+
     private PreparedStatement addZespolStmt;
-    private PreparedStatement deleteAllZespolsStmt;
     private PreparedStatement getAllZespolsStmt;
+    private PreparedStatement getZespolByIdStmt;
+    private PreparedStatement getZespolByNazwaStmt;
+    private PreparedStatement getZespolByKrajStmt;
+    private PreparedStatement deleteZespolStmt;
+    private PreparedStatement deleteAllZespolsStmt;
+    private PreparedStatement updateZespolStmt;
+
+
 
     private Statement statement;
 
@@ -65,13 +74,6 @@ public class ZespolManager {
         return connection;
     }
 
-    void clearZespols() {
-        try {
-            deleteAllZespolsStmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public int addZespol (Zespol zespol) {
         int count = 0;
@@ -110,8 +112,98 @@ public class ZespolManager {
         return zespol;
     }
 
+    public Zespol getZespolById (Zespol zespol) {
+
+        try {
+            getZespolByIdStmt.setInt(1, zespol.getID());
+            ResultSet rs = getZespolByIdStmt.executeQuery();
+
+            while (rs.next()){
+                zespol = new Zespol(rs.getString("zespol_nazwa_zespolu"), rs.getString("zespol_kraj"));
+                zespol.setID(rs.getInt("zespol_id"));
+                return zespol;
+            }
 
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public List<Zespol> getZespolByNazwa (Zespol zespol) {
+        List<Zespol> zespoly = new ArrayList<Zespol>();
+
+        try {
+            ResultSet rs = getZespolByNazwaStmt.executeQuery();
+            while (rs.next()) {
+                Zespol z = new Zespol();
+                z.setID(rs.getInt("zespol_id"));
+                z.setNazwa(rs.getString("zespol_nazwa_zespolu"));
+                z.setKraj(rs.getString("zespol_kraj"));
+                zespoly.add(z);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return zespoly;
+    }
+
+    public List<Zespol> getZespolByKraj (Zespol klub) {
+        List<Zespol> zespoly = new ArrayList<Zespol>();
+
+        try {
+            ResultSet rs = getZespolByKrajStmt.executeQuery();
+            while (rs.next()) {
+                Zespol z = new Zespol();
+                z.setID(rs.getInt("zespol_id"));
+                z.setNazwa(rs.getString("zespol_nazwa_zespolu"));
+                z.setKraj(rs.getString("zespol_kraj"));
+                zespoly.add(z);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return zespoly;
+    }
+
+    public int deleteZespol (Zespol zespol) {
+        int count = 0;
+        try {
+
+            deleteZespolStmt.setInt(1, zespol.getID());
+            count = addZespolStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    void clearZespols() {
+        try {
+            deleteAllZespolsStmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int updateZespol (Zespol zespol) {
+        int count = 0;
+        try {
+            updateZespolStmt.setString(1, zespol.getNazwa());
+            updateZespolStmt.setString(2, zespol.getKraj());
+
+            count = updateZespolStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
 }
