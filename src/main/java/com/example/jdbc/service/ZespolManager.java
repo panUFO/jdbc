@@ -192,7 +192,7 @@ public class ZespolManager {
         return count;
     }
 
-    void clearZespols() {
+   public void clearZespols() {
         try {
             deleteAllZespolsStmt.executeUpdate();
         } catch (SQLException e) {

@@ -213,7 +213,7 @@ public class KlubManager {
         return count;
     }
 
-    void clearKlubs() {
+    public void clearKlubs() {
         try {
             deleteAllKlubsStmt.executeUpdate();
         } catch (SQLException e) {

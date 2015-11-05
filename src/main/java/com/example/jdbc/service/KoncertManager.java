@@ -2,12 +2,7 @@ package com.example.jdbc.service;
 
 import com.example.jdbc.domain.Koncert;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -262,7 +257,7 @@ public class KoncertManager {
         return count;
     }
 
-    void clearKoncerts() {
+    public void clearKoncerts() {
         try {
             deleteAllKoncertsStmt.executeUpdate();
         } catch (SQLException e) {
@@ -285,7 +280,6 @@ public class KoncertManager {
         }
         return count;
     }
-
 
 
 
