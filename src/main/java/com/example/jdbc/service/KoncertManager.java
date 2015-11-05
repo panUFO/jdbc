@@ -1,6 +1,6 @@
-package main.java.com.example.jdbc.service;
+package com.example.jdbc.service;
 
-import main.java.com.example.jdbc.domain.Koncert;
+import com.example.jdbc.domain.Koncert;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
