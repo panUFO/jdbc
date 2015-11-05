@@ -227,6 +227,7 @@ public class KlubManager {
             updateKlubStmt.setString(1, klub.getMiasto());
             updateKlubStmt.setString(2, klub.getNazwa());
             updateKlubStmt.setInt(3, klub.getIlosc_miejsc());
+            updateKlubStmt.setInt(3, klub.getID());
 
             count = updateKlubStmt.executeUpdate();
 
