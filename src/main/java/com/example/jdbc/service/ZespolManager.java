@@ -19,6 +19,7 @@ public class ZespolManager {
 
 
     private Connection connection;
+ //   private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=kliwinski" + ";user=kliwinski" + ";password=224657";
     private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=kliwinski" + ";user=kliwinski" + ";password=224657";
     private String createTableKlub = "CREATE TABLE [zespol] (\n" +
             "  [zespol_id] INTEGER PRIMARY KEY IDENTITY(1,1) NOT NULL,\n" +
@@ -60,8 +61,15 @@ public class ZespolManager {
                 statement.executeUpdate(createTableKlub);
 
             addZespolStmt = connection.prepareStatement("INSERT INTO zespol (zespol_nazwa_zespolu, zespol_kraj) VALUES (?, ?)");
-            deleteAllZespolsStmt = connection.prepareStatement("DELETE FROM zespol");
             getAllZespolsStmt = connection.prepareStatement("SELECT zespol_id, zespol_nazwa_zespolu, zespol_kraj FROM zespol");
+            getZespolByIdStmt = connection.prepareStatement("SELECT * FROM zespol WHERE zespol_id = ?");
+            getZespolByNazwaStmt = connection.prepareStatement("SELECT * FROM zespol WHERE zespol_nazwa_zespolu = ?");
+            getZespolByKrajStmt = connection.prepareStatement("SELECT * FROM zespol WHERE zespol_kraj = ?");
+            deleteZespolStmt = connection.prepareStatement("DELETE FROM zespol WHERE zespol_id = ?");
+            deleteAllZespolsStmt = connection.prepareStatement("DELETE FROM zespol");
+            updateZespolStmt = connection.prepareStatement("UPDATE zespol SET zespol_nazwa_zespolu = ?, zespol_kraj = ? WHERE zespol_id = ?");
+
+
 
 
         }

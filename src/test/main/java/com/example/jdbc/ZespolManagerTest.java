@@ -1,7 +1,25 @@
 package test.main.java.com.example.jdbc;
 
-/**
- * Created by Ufo on 2015-11-01.
- */
+import main.java.com.example.jdbc.domain.Zespol;
+import main.java.com.example.jdbc.service.ZespolManager;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+
 public class ZespolManagerTest {
+
+    ZespolManager zespolManager = new ZespolManager();
+    Zespol zespol;
+
+    @Test
+    public void checkConnection()
+    {
+        assertNotNull(zespolManager.getConnection());
+    }
+
+
+
+
+
 }
