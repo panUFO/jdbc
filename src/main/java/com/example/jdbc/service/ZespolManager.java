@@ -205,6 +205,7 @@ public class ZespolManager {
         try {
             updateZespolStmt.setString(1, zespol.getNazwa());
             updateZespolStmt.setString(2, zespol.getKraj());
+            updateZespolStmt.setInt(3, zespol.getID());
 
             count = updateZespolStmt.executeUpdate();
 

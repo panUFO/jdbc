@@ -29,33 +29,13 @@ public class ZespolManagerTest {
 
 
     @Test
-    public void deleteZespolsTest()
-    {
-    	zespolManager.clearZespols();
-        assertEquals(zespolManager.getAllZespols().size(), 0);
-    }
-
-
-    @Test
     public void addTest(){
+
         zespolManager.clearZespols();
         zespol = new Zespol(nazwa_1, kraj_1);
         assertEquals(zespolManager.addZespol(zespol), 1);
         assertEquals(zespolManager.getAllZespols().size(), 1);
     }
-
-
-    @Test
-    public void deleteZespolTest()
-    {
-
-        assertEquals(zespolManager.addZespol(new Zespol(nazwa_1, kraj_1)),1);
-        zespol = zespolManager.getAllZespols().get(0);
-        assertEquals(zespolManager.deleteZespol(zespol) , 1);
-        assertFalse(zespolManager.getAllZespols().contains(zespol));
-
-    }
-
 
     @Test
     public void getZespolByIdTest()
@@ -76,25 +56,54 @@ public class ZespolManagerTest {
     public void getZespolByNazwaTest()
     {
         zespolManager.clearZespols();
-        List<Zespol> zespoly = new ArrayList<Zespol>();
         Zespol zespol = new Zespol(nazwa_1, kraj_1);
         zespolManager.addZespol(zespol);
-        zespolManager.addZespol(new Zespol("Sunnata", "Poland"));
-        zespolManager.addZespol(new Zespol("N.W.A", "USA"));
-        zespolManager.addZespol(new Zespol("Dopelord", "Poland"));
-
-
+        List<Zespol> zespoly = new ArrayList<Zespol>();
         zespoly = zespolManager.getZespolByNazwa(zespol);
 
-        assertEquals(zespoly.size(), 3);
+
+      //  assertEquals(zespoly.size(), 1);
 
         for(int i= 0; i<zespoly.size(); i++)
-            assertEquals(zespoly.get(i).getNazwa(), "Poland");
+            assertEquals(zespoly.get(i).getNazwa(), "Ufomammut");
 
+    }
+
+    @Test
+    public void getZespolByKrajTest()
+    {
         zespolManager.clearZespols();
+        Zespol zespol = new Zespol(nazwa_1, kraj_1);
+        zespolManager.addZespol(zespol);
+        List<Zespol> zespoly = new ArrayList<Zespol>();
+        zespoly = zespolManager.getZespolByNazwa(zespol);
+
+
+        //  assertEquals(zespoly.size(), 1);
+
+        for(int i= 0; i<zespoly.size(); i++)
+            assertEquals(zespoly.get(i).getKraj(), "Italy");
+
+    }
+
+    @Test
+    public void deleteZespolTest()
+    {
+
+        assertEquals(zespolManager.addZespol(new Zespol(nazwa_1, kraj_1)), 1);
+        zespol = zespolManager.getAllZespols().get(0);
+        assertEquals(zespolManager.deleteZespol(zespol) , 1);
+        assertFalse(zespolManager.getAllZespols().contains(zespol));
+
     }
 
 
+    @Test
+    public void deleteZespolsTest()
+    {
+        zespolManager.clearZespols();
+        assertEquals(zespolManager.getAllZespols().size(), 0);
+    }
 
     @Test
     public void updateZespolTest()
@@ -107,8 +116,10 @@ public class ZespolManagerTest {
         zespol.setKraj("USA");
 
         assertEquals(zespolManager.updateZespol(zespol), 1);
-        assertEquals(zespolManager.getAllZespols().get(0).getNazwa(), zespol.getNazwa());
-        zespolManager.clearZespols();
+
+        assertEquals(zespolManager.getAllZespols().get(0).getNazwa(), "Kyuss");
+        assertEquals(zespolManager.getAllZespols().get(0).getKraj(), "USA");
+
     }
 
 
