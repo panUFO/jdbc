@@ -18,7 +18,7 @@ public class KlubManager {
 
 
     private Connection connection;
-    private String url = "jdbc:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=kliwinski" + ";user=kliwinski" + ";password=224657";
+    private String url = "jdbc:jtds:sqlserver://eos.inf.ug.edu.pl;" + "databaseName=kliwinski" + ";user=kliwinski" + ";password=224657";
     private String createTableKlub = "CREATE TABLE [klub] (\n" +
             "  [klub_id] INTEGER PRIMARY KEY IDENTITY(1,1) NOT NULL,\n" +
             "  [klub_miasto] VARCHAR(50)  NOT NULL,\n" +
