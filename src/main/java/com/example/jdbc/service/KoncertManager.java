@@ -136,26 +136,7 @@ public class KoncertManager {
         }
         return null;
     }
-/*
-    public Koncert getKoncertByKlubId (Koncert koncert) {
 
-        try {
-            getKoncertByKlubIdStmt.setInt(1, koncert.getID());
-            ResultSet rs = getKoncertByKlubIdStmt.executeQuery();
-
-            while (rs.next()){
-                koncert = new Koncert(rs.getString("klub_miasto"), rs.getString("klub_nazwa_klubu"), rs.getInt("klub_ilosc_miejsc"));
-                koncert.setID(rs.getInt("klub_id"));
-                return koncert;
-            }
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-*/
     public List<Koncert> getKoncertByKlubId (Koncert koncert) {
         List<Koncert> koncerty = new ArrayList<Koncert>();
 

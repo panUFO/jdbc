@@ -73,7 +73,7 @@ public class KlubManagerTest {
         Klub klub = new Klub(miasto_1, nazwa_1, ilosc_miejsc_1);
         klubManager.addKlub(klub);
         List<Klub> kluby = new ArrayList<Klub>();
-        kluby = klubManager.getKlubByMiasto(klub);
+        kluby = klubManager.getKlubByNazwa(klub);
 
 
         //  assertEquals(zespoly.size(), 1);
@@ -90,7 +90,7 @@ public class KlubManagerTest {
         Klub klub = new Klub(miasto_1, nazwa_1, ilosc_miejsc_1);
         klubManager.addKlub(klub);
         List<Klub> kluby = new ArrayList<Klub>();
-        kluby = klubManager.getKlubByMiasto(klub);
+        kluby = klubManager.getKlubByIMiejsc(klub);
 
 
         //  assertEquals(zespoly.size(), 1);

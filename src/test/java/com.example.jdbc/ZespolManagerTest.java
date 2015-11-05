@@ -76,7 +76,7 @@ public class ZespolManagerTest {
         Zespol zespol = new Zespol(nazwa_1, kraj_1);
         zespolManager.addZespol(zespol);
         List<Zespol> zespoly = new ArrayList<Zespol>();
-        zespoly = zespolManager.getZespolByNazwa(zespol);
+        zespoly = zespolManager.getZespolByKraj(zespol);
 
 
         //  assertEquals(zespoly.size(), 1);
