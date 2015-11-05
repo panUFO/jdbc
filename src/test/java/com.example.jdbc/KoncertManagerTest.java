@@ -36,16 +36,11 @@ public class KoncertManagerTest {
         assertNotNull(koncertManager.getConnection());
     }
 
-    @Test
-    public void deleteKoncertsTest()
-    {
-        koncertManager.clearKoncerts();
-        assertEquals(koncertManager.getAllKoncerts().size(), 0);
-    }
 
     @Test
     public void addTest(){
         koncertManager.clearKoncerts();
+        klubManager.clearKlubs();
         //zespol = new Zespol("Kyuss", "USA");
         klub = new Klub("Gdynia", "Desdemona", 200);
 
@@ -60,6 +55,8 @@ public class KoncertManagerTest {
 
         assertEquals(koncertManager.addKoncert(koncert), 1);
         assertEquals(koncertManager.getAllKoncerts().size(), 1);
+        koncertManager.clearKoncerts();
+        klubManager.clearKlubs();
     }
 
     @Test
@@ -77,6 +74,14 @@ public class KoncertManagerTest {
         assertEquals(koncert.getCeny_biletow(), koncertDB.getCeny_biletow());
         assertEquals(koncert.getData(), koncertDB.getData());
 
+    }
+
+
+    @Test
+    public void deleteKoncertsTest()
+    {
+        koncertManager.clearKoncerts();
+        assertEquals(koncertManager.getAllKoncerts().size(), 0);
     }
 
 }

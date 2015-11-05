@@ -40,7 +40,7 @@ public class ZespolManagerTest {
     @Test
     public void getZespolByIdTest()
     {
-
+        zespolManager.clearZespols();
         Zespol zespolDB;
         zespolManager.addZespol(new Zespol(nazwa_1, kraj_1));
         zespol = zespolManager.getAllZespols().get(0);

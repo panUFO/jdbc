@@ -136,7 +136,7 @@ public class KlubManagerTest {
 
         assertEquals(klubManager.getAllKlubs().get(0).getMiasto(), "Poznan");
         assertEquals(klubManager.getAllKlubs().get(0).getNazwa(), "ABC");
-        assertEquals(klubManager.getAllKlubs().get(0).getIlosc_miejsc(), "200");
+        assertEquals(klubManager.getAllKlubs().get(0).getIlosc_miejsc(), 200);
 
     }
 
