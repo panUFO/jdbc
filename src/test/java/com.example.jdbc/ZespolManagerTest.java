@@ -4,6 +4,8 @@ import com.example.jdbc.domain.Zespol;
 import com.example.jdbc.service.KlubManager;
 import com.example.jdbc.service.ZespolManager;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -120,8 +122,13 @@ public class ZespolManagerTest {
         zespolManager.clearZespols();
         assertEquals(zespolManager.getAllZespols().size(), 0);
     }
+    @After
+    @Before
+    public void usunto ()
+    {
+        zespolManager.clearZespols();
 
-
+    }
 
 
 

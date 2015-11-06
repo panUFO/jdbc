@@ -9,6 +9,8 @@ import com.example.jdbc.service.KoncertManager;
 import java.sql.Date;
 
 import com.example.jdbc.service.ZespolManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -131,7 +133,14 @@ public class KoncertManagerTest {
 
     }
 
+    @After
+    @Before
+    public void usunto ()
+    {
+        koncertManager.clearKoncerts();
+        klubManager.clearKlubs();
 
+    }
 
 
 

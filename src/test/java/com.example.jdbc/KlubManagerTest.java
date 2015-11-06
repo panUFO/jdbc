@@ -2,6 +2,9 @@ package com.example.jdbc;
 
 import com.example.jdbc.domain.Klub;
 import com.example.jdbc.service.KlubManager;
+import com.example.jdbc.service.KoncertManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ import static org.junit.Assert.*;
 public class KlubManagerTest {
 
     KlubManager klubManager = new KlubManager();
+    KoncertManager koncertManager = new KoncertManager();
     Klub klub;
 
     private final static String miasto_1 = "Gdansk";
@@ -35,7 +39,7 @@ public class KlubManagerTest {
     @Test
     public void getKlubByIdTest()
     {
-
+        klubManager.clearKlubs();
         Klub klubDB = null;
         klubManager.addKlub(new Klub(miasto_1, nazwa_1, ilosc_miejsc_1));
         klub = klubManager.getAllKlubs().get(0);
@@ -140,10 +144,14 @@ public class KlubManagerTest {
 
     }
 
+    @After
+    @Before
+    public void usunto ()
+    {
+        koncertManager.clearKoncerts();
+        klubManager.clearKlubs();
 
-
-
-
+    }
 
 
 }
