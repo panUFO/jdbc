@@ -16,7 +16,7 @@ public class KoncertManager {
             "  [koncert_id] INTEGER PRIMARY KEY IDENTITY(1,1) NOT NULL,\n" +
             "  [koncert_klub_id] INTEGER  NOT NULL REFERENCES klub(klub_id) ,\n" +
             "  [nazwa_koncertu] VARCHAR(50) NOT NULL,\n" +
-            "  [ceny_biletow] DECIMAL\n" +
+            "  [ceny_biletow] VARCHAR (10)\n" +
             ")";
 
 
@@ -91,19 +91,27 @@ public class KoncertManager {
     }
 
     public List<Koncert> getAllKoncerts(){
-        List<Koncert> koncert = new ArrayList<Koncert>();
+        List<Koncert> koncerty = new ArrayList<Koncert>();
 
         ResultSet rs = null;
         try {
             rs = getAllKoncertsStmt.executeQuery();
 
             while (rs.next()) {
+              /*
                 Koncert k = new Koncert();
                 k.setID(rs.getInt("koncert_id"));
                 k.setKlub_id(rs.getInt("koncert_klub_id"));
                 k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
                 k.setCeny_biletow(rs.getString("ceny_biletow"));
-                koncert.add(k);
+                */
+
+                Koncert k;
+                k = new Koncert(rs.getInt("koncert_klub_id"), rs.getString("nazwa_koncertu"), rs.getString("ceny_biletow"));
+                k.setID(rs.getInt("koncert_id"));
+                koncerty.add(k);
+
+                koncerty.add(k);
 
             }
 
@@ -111,7 +119,7 @@ public class KoncertManager {
             e.printStackTrace();
         }
 
-        return koncert;
+        return koncerty;
     }
 
     public Koncert getKoncertById (Koncert koncert) {
@@ -137,6 +145,7 @@ public class KoncertManager {
         List<Koncert> koncerty = new ArrayList<Koncert>();
 
         try {
+            getKoncertByKlubIdStmt.setInt(1, koncert.getKlub_id());
             ResultSet rs = getKoncertByKlubIdStmt.executeQuery();
             while (rs.next()) {
                 Koncert k = new Koncert();
@@ -158,6 +167,7 @@ public class KoncertManager {
         List<Koncert> koncerty = new ArrayList<Koncert>();
 
         try {
+            getKoncertByNazwaKoncetuStmt.setString(1, koncert.getNazwa_koncertu());
             ResultSet rs = getKoncertByNazwaKoncetuStmt.executeQuery();
             while (rs.next()) {
                 Koncert k = new Koncert();
@@ -179,6 +189,7 @@ public class KoncertManager {
         List<Koncert> koncerty = new ArrayList<Koncert>();
 
         try {
+            getKoncertByNazwaKoncetuStmt.setString(1, koncert.getCeny_biletow());
             ResultSet rs = getKoncertByNazwaKoncetuStmt.executeQuery();
             while (rs.next()) {
                 Koncert k = new Koncert();
@@ -236,6 +247,3 @@ public class KoncertManager {
 
 
 }
-
-
-

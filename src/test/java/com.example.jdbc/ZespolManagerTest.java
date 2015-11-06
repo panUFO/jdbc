@@ -97,14 +97,6 @@ public class ZespolManagerTest {
 
     }
 
-
-    @Test
-    public void deleteZespolsTest()
-    {
-        zespolManager.clearZespols();
-        assertEquals(zespolManager.getAllZespols().size(), 0);
-    }
-
     @Test
     public void updateZespolTest()
     {
@@ -121,6 +113,15 @@ public class ZespolManagerTest {
         assertEquals(zespolManager.getAllZespols().get(0).getKraj(), "USA");
 
     }
+
+    @Test
+    public void deleteZespolsTest()
+    {
+        zespolManager.clearZespols();
+        assertEquals(zespolManager.getAllZespols().size(), 0);
+    }
+
+
 
 
 

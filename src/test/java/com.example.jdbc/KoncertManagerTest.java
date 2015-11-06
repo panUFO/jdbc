@@ -37,6 +37,31 @@ public class KoncertManagerTest {
     }
 
 
+
+    @Test
+    public void addTest(){
+
+        assertEquals(klubManager.addKlub(new Klub("Gdynia", "Desdemona", 200)) , 1);
+        klub = klubManager.getAllKlubs().get(0);
+
+        koncert= new Koncert(klub.getID(), nazwa_koncertu_1, ceny_biletow_1);
+
+        assertEquals(koncertManager.addKoncert(koncert), 1);
+
+        assertEquals(koncertManager.getAllKoncerts().get(0).getKlub_id(), klub.getID());
+     //   assertEquals(koncertManager.getAllKoncerts().get(0).getNazwa_koncertu(), koncert.getNazwa_koncertu());
+     //   assertEquals(koncertManager.getAllKoncerts().get(0).getCeny_biletow(), koncert.getCeny_biletow());
+
+        koncertManager.clearKoncerts();
+        klubManager.clearKlubs();
+
+    }
+
+
+
+  /*
+
+
     @Test
     public void addTest(){
         koncertManager.clearKoncerts();
@@ -63,7 +88,7 @@ public class KoncertManagerTest {
     public void getKoncertByIdTest()
     {
 
-        Koncert koncertDB = null;
+        Koncert koncertDB;
         koncertManager.addKoncert(new Koncert(1, nazwa_koncertu_1, ceny_biletow_1));
         koncert = koncertManager.getAllKoncerts().get(0);
         koncertDB = koncertManager.getKoncertById(koncert);
@@ -74,13 +99,17 @@ public class KoncertManagerTest {
         assertEquals(koncert.getCeny_biletow(), koncertDB.getCeny_biletow());
 
     }
-
+*/
 
     @Test
     public void deleteKoncertsTest()
     {
         koncertManager.clearKoncerts();
         assertEquals(koncertManager.getAllKoncerts().size(), 0);
+
+        klubManager.clearKlubs();
+        assertEquals(klubManager.getAllKlubs().size(), 0);
+
     }
 
 }
