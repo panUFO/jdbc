@@ -141,6 +141,7 @@ public class KlubManager {
         List<Klub> kluby = new ArrayList<Klub>();
 
         try {
+            getKlubByMiastoStmt.setString(1, klub.getMiasto());
             ResultSet rs = getKlubByMiastoStmt.executeQuery();
             while (rs.next()) {
                 Klub k = new Klub();
@@ -162,6 +163,7 @@ public class KlubManager {
         List<Klub> kluby = new ArrayList<Klub>();
 
         try {
+            getKlubByNazwaStmt.setString(1, klub.getNazwa());
             ResultSet rs = getKlubByNazwaStmt.executeQuery();
             while (rs.next()) {
                 Klub k = new Klub();
@@ -183,6 +185,7 @@ public class KlubManager {
         List<Klub> kluby = new ArrayList<Klub>();
 
         try {
+            getKlubByIMiejscStmt.setInt(1, klub.getIlosc_miejsc());
             ResultSet rs = getKlubByIMiejscStmt.executeQuery();
             while (rs.next()) {
                 Klub k = new Klub();

@@ -16,8 +16,7 @@ public class KoncertManager {
             "  [koncert_id] INTEGER PRIMARY KEY IDENTITY(1,1) NOT NULL,\n" +
             "  [koncert_klub_id] INTEGER  NOT NULL REFERENCES klub(klub_id) ,\n" +
             "  [nazwa_koncertu] VARCHAR(50) NOT NULL,\n" +
-            "  [ceny_biletow] DECIMAL,\n" +
-            "  [data] DATE NOT NULL\n" +
+            "  [ceny_biletow] DECIMAL\n" +
             ")";
 
 
@@ -27,7 +26,6 @@ public class KoncertManager {
     private PreparedStatement getKoncertByKlubIdStmt;
     private PreparedStatement getKoncertByNazwaKoncetuStmt;
     private PreparedStatement getKoncertByCenyBiletowStmt;
-    private PreparedStatement getKoncertByDataStmt;
     private PreparedStatement deleteKoncertStmt;
     private PreparedStatement deleteAllKoncertsStmt;
     private PreparedStatement updateKoncertStmt;
@@ -54,16 +52,15 @@ public class KoncertManager {
                 statement.executeUpdate(createTableKoncert);
 
 
-            addKoncertStmt = connection.prepareStatement("INSERT INTO koncert (koncert_klub_id, nazwa_koncertu, ceny_biletow, data) VALUES (?, ?, ?, ?)");
-            getAllKoncertsStmt = connection.prepareStatement("SELECT koncert_klub_id, nazwa_koncertu, ceny_biletow, data FROM koncert");
+            addKoncertStmt = connection.prepareStatement("INSERT INTO koncert (koncert_klub_id, nazwa_koncertu, ceny_biletow) VALUES (?, ?, ?)");
+            getAllKoncertsStmt = connection.prepareStatement("SELECT koncert_klub_id, nazwa_koncertu, ceny_biletow FROM koncert");
             getKoncertByIdStmt = connection.prepareStatement("SELECT * FROM koncert WHERE koncert_id = ?");
             getKoncertByKlubIdStmt = connection.prepareStatement("SELECT * FROM koncert WHERE koncert_klub_id = ?");
             getKoncertByNazwaKoncetuStmt = connection.prepareStatement("SELECT * FROM koncert WHERE nazwa_koncertu = ?");
             getKoncertByCenyBiletowStmt = connection.prepareStatement("SELECT * FROM koncert WHERE ceny_biletow = ?");
-            getKoncertByDataStmt = connection.prepareStatement("SELECT * FROM koncert WHERE data = ?");
             deleteKoncertStmt = connection.prepareStatement("DELETE FROM koncert WHERE koncert_id = ?");
             deleteAllKoncertsStmt = connection.prepareStatement("DELETE FROM koncert");
-            updateKoncertStmt = connection.prepareStatement("UPDATE koncert SET koncert_klub_id = ?, nazwa_koncertu = ?, ceny_biletow = ?, data = ?, WHERE koncert_id = ?");
+            updateKoncertStmt = connection.prepareStatement("UPDATE koncert SET koncert_klub_id = ?, nazwa_koncertu = ?, ceny_biletow = ? WHERE koncert_id = ?");
 
 
         }
@@ -83,7 +80,7 @@ public class KoncertManager {
             addKoncertStmt.setInt(1, koncert.getKlub_id());
             addKoncertStmt.setString(2, koncert.getNazwa_koncertu());
             addKoncertStmt.setString(3, koncert.getCeny_biletow());
-            addKoncertStmt.setDate(4, koncert.getData());
+
 
             count = addKoncertStmt.executeUpdate();
 
@@ -106,7 +103,6 @@ public class KoncertManager {
                 k.setKlub_id(rs.getInt("koncert_klub_id"));
                 k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
                 k.setCeny_biletow(rs.getString("ceny_biletow"));
-                k.setData(rs.getDate("data"));
                 koncert.add(k);
 
             }
@@ -125,7 +121,7 @@ public class KoncertManager {
             ResultSet rs = getKoncertByIdStmt.executeQuery();
 
             while (rs.next()){
-                koncert = new Koncert(rs.getInt("klub_id"), rs.getString("nazwa_koncertu"), rs.getString("ceny_biletow"), rs.getDate("data"));
+                koncert = new Koncert(rs.getInt("klub_id"), rs.getString("nazwa_koncertu"), rs.getString("ceny_biletow"));
                 koncert.setID(rs.getInt("koncert_id"));
                 return koncert;
             }
@@ -148,7 +144,6 @@ public class KoncertManager {
                 k.setKlub_id(rs.getInt("koncert_klub_id"));
                 k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
                 k.setCeny_biletow(rs.getString("ceny_biletow"));
-                k.setData(rs.getDate("data"));
                 koncerty.add(k);
             }
 
@@ -170,7 +165,6 @@ public class KoncertManager {
                 k.setKlub_id(rs.getInt("koncert_klub_id"));
                 k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
                 k.setCeny_biletow(rs.getString("ceny_biletow"));
-                k.setData(rs.getDate("data"));
                 koncerty.add(k);
             }
 
@@ -192,7 +186,6 @@ public class KoncertManager {
                 k.setKlub_id(rs.getInt("koncert_klub_id"));
                 k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
                 k.setCeny_biletow(rs.getString("ceny_biletow"));
-                k.setData(rs.getDate("data"));
                 koncerty.add(k);
             }
 
@@ -203,27 +196,6 @@ public class KoncertManager {
         return koncerty;
     }
 
-    public List<Koncert> getKoncertByDataStmt (Koncert koncert) {
-        List<Koncert> koncerty = new ArrayList<Koncert>();
-
-        try {
-            ResultSet rs = getKoncertByDataStmt.executeQuery();
-            while (rs.next()) {
-                Koncert k = new Koncert();
-                k.setID(rs.getInt("koncert_id"));
-                k.setKlub_id(rs.getInt("koncert_klub_id"));
-                k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
-                k.setCeny_biletow(rs.getString("ceny_biletow"));
-                k.setData(rs.getDate("data"));
-                koncerty.add(k);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return koncerty;
-    }
 
     public int deleteKlub (Koncert koncert) {
         int count = 0;
@@ -252,7 +224,6 @@ public class KoncertManager {
             updateKoncertStmt.setInt(1, koncert.getKlub_id());
             updateKoncertStmt.setString(2, koncert.getNazwa_koncertu());
             updateKoncertStmt.setString(3, koncert.getCeny_biletow());
-            updateKoncertStmt.setDate(4, koncert.getData());
 
             count = updateKoncertStmt.executeUpdate();
 

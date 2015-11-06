@@ -25,7 +25,7 @@ public class KoncertManagerTest {
 
     private final static String nazwa_koncertu_1 = "Stonery";
     private final static String ceny_biletow_1 = "55zl";
-//    private final static Date data_1 = 2015-12-05;
+
 
 
 
@@ -45,7 +45,7 @@ public class KoncertManagerTest {
         klub = new Klub("Gdynia", "Desdemona", 200);
 
 
-        koncert = new Koncert(klub.getID(), nazwa_koncertu_1, ceny_biletow_1, Date.valueOf("2015-12-24"));
+        koncert = new Koncert(klub.getID(), nazwa_koncertu_1, ceny_biletow_1);
         assertEquals(klubManager.addKlub(klub), 1);
         assertEquals(klubManager.getAllKlubs().size(), 1);
 
@@ -64,7 +64,7 @@ public class KoncertManagerTest {
     {
 
         Koncert koncertDB = null;
-        koncertManager.addKoncert(new Koncert(1, nazwa_koncertu_1, ceny_biletow_1, Date.valueOf("2015-12-24")));
+        koncertManager.addKoncert(new Koncert(1, nazwa_koncertu_1, ceny_biletow_1));
         koncert = koncertManager.getAllKoncerts().get(0);
         koncertDB = koncertManager.getKoncertById(koncert);
 
@@ -72,7 +72,6 @@ public class KoncertManagerTest {
         assertEquals(koncert.getKlub_id(), koncertDB.getKlub_id());
         assertEquals(koncert.getNazwa_koncertu(), koncertDB.getNazwa_koncertu());
         assertEquals(koncert.getCeny_biletow(), koncertDB.getCeny_biletow());
-        assertEquals(koncert.getData(), koncertDB.getData());
 
     }
 

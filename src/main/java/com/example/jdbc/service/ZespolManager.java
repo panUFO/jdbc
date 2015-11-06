@@ -143,6 +143,7 @@ public class ZespolManager {
         List<Zespol> zespoly = new ArrayList<Zespol>();
 
         try {
+            getZespolByNazwaStmt.setString(1, zespol.getNazwa());
             ResultSet rs = getZespolByNazwaStmt.executeQuery();
             while (rs.next()) {
                 Zespol z = new Zespol();
@@ -159,10 +160,11 @@ public class ZespolManager {
         return zespoly;
     }
 
-    public List<Zespol> getZespolByKraj (Zespol klub) {
+    public List<Zespol> getZespolByKraj (Zespol zespol) {
         List<Zespol> zespoly = new ArrayList<Zespol>();
 
         try {
+            getZespolByKrajStmt.setString(1, zespol.getKraj());
             ResultSet rs = getZespolByKrajStmt.executeQuery();
             while (rs.next()) {
                 Zespol z = new Zespol();
