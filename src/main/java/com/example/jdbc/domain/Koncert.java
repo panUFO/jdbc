@@ -16,8 +16,8 @@ public class Koncert {
     }
 
     public Koncert(int klub_id, String nazwa_koncertu, String ceny_biletow) {
-        super();
-        this.klub_id = klub_id;
+            super();
+            this.klub_id = klub_id;
         this.nazwa_koncertu = nazwa_koncertu;
         this.ceny_biletow = ceny_biletow;
     }

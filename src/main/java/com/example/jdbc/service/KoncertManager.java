@@ -53,7 +53,7 @@ public class KoncertManager {
 
 
             addKoncertStmt = connection.prepareStatement("INSERT INTO koncert (koncert_klub_id, nazwa_koncertu, ceny_biletow) VALUES (?, ?, ?)");
-            getAllKoncertsStmt = connection.prepareStatement("SELECT koncert_klub_id, nazwa_koncertu, ceny_biletow FROM koncert");
+            getAllKoncertsStmt = connection.prepareStatement("SELECT koncert_id, koncert_klub_id, nazwa_koncertu, ceny_biletow FROM koncert");
             getKoncertByIdStmt = connection.prepareStatement("SELECT * FROM koncert WHERE koncert_id = ?");
             getKoncertByKlubIdStmt = connection.prepareStatement("SELECT * FROM koncert WHERE koncert_klub_id = ?");
             getKoncertByNazwaKoncetuStmt = connection.prepareStatement("SELECT * FROM koncert WHERE nazwa_koncertu = ?");
@@ -98,21 +98,21 @@ public class KoncertManager {
             rs = getAllKoncertsStmt.executeQuery();
 
             while (rs.next()) {
-              /*
+
                 Koncert k = new Koncert();
                 k.setID(rs.getInt("koncert_id"));
                 k.setKlub_id(rs.getInt("koncert_klub_id"));
                 k.setNazwa_koncertu(rs.getString("nazwa_koncertu"));
                 k.setCeny_biletow(rs.getString("ceny_biletow"));
-                */
-
+                koncerty.add(k);
+/*
                 Koncert k;
                 k = new Koncert(rs.getInt("koncert_klub_id"), rs.getString("nazwa_koncertu"), rs.getString("ceny_biletow"));
                 k.setID(rs.getInt("koncert_id"));
                 koncerty.add(k);
 
                 koncerty.add(k);
-
+*/
             }
 
         } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class KoncertManager {
             ResultSet rs = getKoncertByIdStmt.executeQuery();
 
             while (rs.next()){
-                koncert = new Koncert(rs.getInt("klub_id"), rs.getString("nazwa_koncertu"), rs.getString("ceny_biletow"));
+                koncert = new Koncert(rs.getInt("koncert_klub_id"), rs.getString("nazwa_koncertu"), rs.getString("ceny_biletow"));
                 koncert.setID(rs.getInt("koncert_id"));
                 return koncert;
             }
@@ -229,12 +229,13 @@ public class KoncertManager {
         }
     }
 
-    public int updateKlub (Koncert koncert) {
+    public int updateKoncert (Koncert koncert) {
         int count = 0;
         try {
             updateKoncertStmt.setInt(1, koncert.getKlub_id());
             updateKoncertStmt.setString(2, koncert.getNazwa_koncertu());
             updateKoncertStmt.setString(3, koncert.getCeny_biletow());
+            updateKoncertStmt.setInt(4, koncert.getID());
 
             count = updateKoncertStmt.executeUpdate();
 
